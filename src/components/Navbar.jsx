@@ -1,28 +1,47 @@
+import React from 'react';
+import { FiShoppingCart } from 'react-icons/fi';
+
 const Navbar = ({ cartCount }) => {
   return (
-    <div className="navbar bg-white border-b px-4 md:px-12 h-20">
-      <div className="navbar-start">
-        <a className="text-2xl font-black tracking-tighter text-purple-600">DigiTools</a>
-      </div>
-      
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 font-semibold gap-6">
-          <li><a className="hover:text-purple-600">Home</a></li>
-          <li><a className="hover:text-purple-600">Products</a></li>
-          <li><a className="hover:text-purple-600">Pricing</a></li>
-        </ul>
-      </div>
+    <nav className="bg-white border-b border-gray-100 py-4 px-6 md:px-12 lg:px-24 sticky top-0 z-50">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        
+        {/* Logo */}
+        <div className="text-[#7C3AED] text-3xl font-extrabold tracking-tight">
+          DigiTools
+        </div>
 
-      <div className="navbar-end gap-4">
-        <div className="indicator mr-4">
-          <span className="indicator-item badge badge-primary badge-sm">{cartCount}</span> 
-          <button className="btn btn-ghost btn-circle">
-            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" /></svg>
+        {/* Center Links */}
+        <div className="hidden lg:flex items-center gap-8 text-slate-600 font-medium text-sm">
+          <a href="#" className="hover:text-[#7C3AED] transition-colors">Products</a>
+          <a href="#" className="hover:text-[#7C3AED] transition-colors">Features</a>
+          <a href="#" className="hover:text-[#7C3AED] transition-colors">Pricing</a>
+          <a href="#" className="hover:text-[#7C3AED] transition-colors">Testimonials</a>
+          <a href="#" className="hover:text-[#7C3AED] transition-colors">FAQ</a>
+        </div>
+
+        {/* Right Actions */}
+        <div className="flex items-center gap-6">
+          {/* Cart Icon with Count */}
+          <div className="relative cursor-pointer group">
+            <FiShoppingCart className="text-slate-700 group-hover:text-[#7C3AED] transition-colors" size={20} />
+            {cartCount > 0 && (
+              <span className="absolute -top-2 -right-2 bg-pink-500 text-white text-[10px] w-4 h-4 rounded-full flex items-center justify-center font-bold">
+                {cartCount}
+              </span>
+            )}
+          </div>
+
+          <button className="text-slate-700 font-bold text-sm hover:text-[#7C3AED] transition-colors">
+            Login
+          </button>
+
+          <button className="bg-gradient-to-r from-[#7C3AED] to-[#A855F7] text-white px-7 py-3 rounded-full font-bold text-sm shadow-lg shadow-purple-200 hover:opacity-90 transition-all active:scale-95">
+            Get Started
           </button>
         </div>
-        <button className="btn btn-primary rounded-xl px-8 font-bold">Login</button>
       </div>
-    </div>
+    </nav>
   );
 };
 

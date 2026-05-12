@@ -1,48 +1,74 @@
-import React from "react";
-import userIcon from "../assets/user.png";
-import packageIcon from "../assets/package.png";
-import rocketIcon from "../assets/rocket.png";
+import React from 'react';
+import { CiUser } from "react-icons/ci";
+
+const steps = [
+  {
+    id: "01",
+    title: "Create Account",
+    desc: "Sign up for free in seconds. No credit card required to get started.",
+    icon: <CiUser />
+  },
+  {
+    id: "02",
+    title: "Choose Products",
+    desc: "Browse our catalog and select the tools that fit your needs.",
+    icon: <CiUser />},
+  {
+    id: "03",
+    title: "Start Creating",
+    desc: "Download and start using your premium tools immediately.",
+    icon: <CiUser />
+  }
+];
 
 const Steps = () => {
-  const steps = [
-    {
-      id: 1,
-      title: "Create Account",
-      desc: "Sign up for free in seconds.",
-      icon: userIcon,
-    },
-    {
-      id: 2,
-      title: "Choose Products",
-      desc: "Browse our catalog and select.",
-      icon: packageIcon,
-    },
-    {
-      id: 3,
-      title: "Start Creating",
-      desc: "Download and start using immediately.",
-      icon: rocketIcon,
-    },
-  ];
-
   return (
-    <div className="py-24 bg-white">
-      <div className="text-center mb-16">
-        <h2 className="text-4xl font-extrabold text-gray-900">Get Started In 3 Steps</h2>
-        <p className="text-gray-500 mt-3 text-lg">Start using premium digital tools in minutes.</p>
-      </div>
-      <div className="flex flex-wrap justify-center gap-8 px-4">
-        {steps.map((item) => (
-          <div key={item.id} className="w-full md:w-80 bg-white border border-gray-100 p-10 text-center rounded-[2.5rem] shadow-sm hover:shadow-xl transition-all">
-            <div className="bg-[#F8F7FF] w-24 h-24 rounded-3xl flex items-center justify-center mx-auto mb-8">
-              <img src={item.icon} alt={item.title} className="w-12 h-12 object-contain" />
+    <section className="bg-white py-24 px-6 md:px-12 lg:px-24">
+      <div className="max-w-7xl mx-auto">
+        
+        {/* Header Section */}
+        <div className="text-center mb-20">
+          {/* bold and precise title as requested */}
+          <h2 className="text-[42px] md:text-[52px] font-black text-[#0F172A] tracking-tight mb-5">
+            Get Started In 3 Steps
+          </h2>
+          <p className="text-[#64748B] text-[17px] font-normal">
+            Start using premium digital tools in minutes, not hours.
+          </p>
+        </div>
+
+        {/* Steps Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          {steps.map((step, index) => (
+            <div 
+              key={index} 
+              className="relative bg-white border border-gray-100 rounded-[32px] p-10 md:p-14 text-center shadow-[0_4px_30px_rgba(0,0,0,0.02)] hover:shadow-xl transition-all duration-500 group"
+            >
+              {/* Step Number Badge */}
+              <div className="absolute top-7 right-7 bg-[#7C3AED] text-white text-[11px] font-bold w-8 h-8 rounded-full flex items-center justify-center shadow-lg shadow-purple-100 group-hover:scale-110 transition-transform">
+                {step.id}
+              </div>
+
+              {/* Icon Circle */}
+              <div className="w-24 h-24 bg-[#F5F3FF] rounded-full flex items-center justify-center mx-auto mb-9 group-hover:bg-[#EDE9FE] transition-colors">
+                {step.icon}
+              </div>
+
+              {/* Card Title */}
+              <h3 className="text-[26px] font-bold text-[#1E293B] mb-5">
+                {step.title}
+              </h3>
+              
+              {/* Card Description */}
+              <p className="text-[#64748B] text-[16px] leading-relaxed max-w-[280px] mx-auto font-medium">
+                {step.desc}
+              </p>
             </div>
-            <h3 className="text-2xl font-bold text-gray-800 mb-4">{item.title}</h3>
-            <p className="text-gray-500 leading-relaxed">{item.desc}</p>
-          </div>
-        ))}
+          ))}
+        </div>
+
       </div>
-    </div>
+    </section>
   );
 };
 

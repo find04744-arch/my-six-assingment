@@ -1,19 +1,24 @@
+import React from 'react';
+import { FaCheck } from 'react-icons/fa';
+
 const Pricing = () => {
   const plans = [
     {
       name: "Starter",
+      desc: "Perfect for getting started",
       price: "0",
       features: [
         "Access to 10 free tools",
         "Basic templates",
         "Community support",
-        "1 project per month",
+        "1 project per month"
       ],
-      button: "Get Started Free",
-      isPopular: false,
+      buttonText: "Get Started Free",
+      isHighlighted: false
     },
     {
       name: "Pro",
+      desc: "Best for professionals",
       price: "29",
       features: [
         "Access to all premium tools",
@@ -21,13 +26,15 @@ const Pricing = () => {
         "Priority support",
         "Unlimited projects",
         "Cloud sync",
-        "Advanced analytics",
+        "Advanced analytics"
       ],
-      button: "Start Pro Trial",
-      isPopular: true,
+      buttonText: "Start Pro Trial",
+      isHighlighted: true,
+      badge: "Most Popular"
     },
     {
       name: "Enterprise",
+      desc: "For teams and businesses",
       price: "99",
       features: [
         "Everything in Pro",
@@ -35,64 +42,74 @@ const Pricing = () => {
         "Custom integrations",
         "Dedicated support",
         "SLA guarantee",
-        "Custom branding",
+        "Custom branding"
       ],
-      button: "Contact Sales",
-      isPopular: false,
-    },
+      buttonText: "Contact Sales",
+      isHighlighted: false
+    }
   ];
 
   return (
-    <div className="py-24 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 text-center mb-16">
-        <h2 className="text-4xl font-bold mb-4">Simple, Transparent Pricing</h2>
-        <p className="text-gray-500 italic">
+    <section className="bg-white py-24 px-6">
+      <div className="max-w-7xl mx-auto text-center mb-16">
+        <h2 className="text-4xl md:text-5xl font-bold text-[#0F172A] mb-6">
+          Simple, Transparent Pricing
+        </h2>
+        <p className="text-[#64748B] text-lg">
           Choose the plan that fits your needs. Upgrade or downgrade anytime.
         </p>
       </div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        {plans.map((plan, idx) => (
+      <div className="flex flex-col lg:flex-row items-center justify-center gap-8 max-w-6xl mx-auto">
+        {plans.map((plan, index) => (
           <div
-            key={idx}
-            className={`relative p-8 rounded-3xl border ${plan.isPopular ? "bg-[#7C3AED] text-white shadow-2xl scale-105 z-10" : "bg-white text-gray-800"}`}
+            key={index}
+            className={`relative w-full max-w-sm rounded-[2rem] p-10 transition-all duration-300 ${
+              plan.isHighlighted 
+                ? "bg-[#8B2CFF] text-white scale-105 shadow-2xl z-10" 
+                : "bg-white border border-gray-100 text-[#1E293B] shadow-sm"
+            }`}
           >
-            {plan.isPopular && (
-              <span className="absolute -top-4 left-1/2 -translate-x-1/2 bg-yellow-400 text-black text-xs font-bold px-4 py-1 rounded-full uppercase">
-                Most Popular
-              </span>
+            {plan.badge && (
+              <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-[#FFEDD5] text-[#9A3412] px-4 py-1 rounded-full text-xs font-bold shadow-sm">
+                {plan.badge}
+              </div>
             )}
-            <h3 className="text-xl font-bold mb-2">{plan.name}</h3>
-            <p className="text-sm opacity-80 mb-6 font-medium">
-              Best for {plan.name.toLowerCase()}s
+
+            <h3 className="text-2xl font-bold mb-2">{plan.name}</h3>
+            <p className={`${plan.isHighlighted ? "text-purple-100" : "text-[#64748B]"} mb-8`}>
+              {plan.desc}
             </p>
+
             <div className="mb-8">
               <span className="text-5xl font-bold">${plan.price}</span>
-              <span className="text-sm opacity-70">/Month</span>
+              <span className={`${plan.isHighlighted ? "text-purple-100" : "text-[#94A3B8]"} text-lg`}>
+                /Month
+              </span>
             </div>
-            <ul className="space-y-4 mb-10 text-left">
-              {plan.features.map((f, i) => (
-                <li key={i} className="flex items-center gap-3 text-sm">
-                  <span
-                    className={
-                      plan.isPopular ? "text-green-300" : "text-green-500"
-                    }
-                  >
-                    ✓
-                  </span>{" "}
-                  {f}
+
+            <ul className="space-y-4 mb-10">
+              {plan.features.map((feature, i) => (
+                <li key={i} className="flex items-center gap-3 font-medium">
+                  <FaCheck className={`${plan.isHighlighted ? "text-white" : "text-[#10B981]"}`} />
+                  {feature}
                 </li>
               ))}
             </ul>
+
             <button
-              className={`btn w-full rounded-xl border-none ${plan.isPopular ? "bg-white text-primary hover:bg-gray-100" : "bg-primary text-white"}`}
+              className={`w-full py-4 rounded-2xl font-bold text-lg transition-all active:scale-95 ${
+                plan.isHighlighted
+                  ? "bg-white text-[#8B2CFF] hover:bg-gray-50"
+                  : "bg-[#7C3AED] text-white hover:bg-[#6D28D9] shadow-lg shadow-purple-100"
+              }`}
             >
-              {plan.button}
+              {plan.buttonText}
             </button>
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

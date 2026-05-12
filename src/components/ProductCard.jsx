@@ -1,53 +1,42 @@
-const ProductCard = ({ product, addToCart }) => {
-  const { name, description, price, period, tag, tagType, features, icon } =
-    product;
+import React from 'react';
+import { FaCheck } from 'react-icons/fa';
 
+const ProductCard = ({ product }) => {
   return (
-    <div className="card bg-white shadow-xl border border-gray-100 relative p-6 rounded-3xl">
-      {/* dynamic badge based on tagType */}
-      {tag && (
-        <div
-          className={`absolute top-4 right-4 badge badge-sm py-3 px-4 border-none font-semibold text-white ${
-            tagType === "best-seller"
-              ? "bg-orange-400"
-              : tagType === "popular"
-                ? "bg-purple-500"
-                : "bg-green-500"
-          }`}
-        >
-          {tag}
-        </div>
-      )}
-
-      <div className="mb-4 text-4xl bg-blue-50 w-16 h-16 flex items-center justify-center rounded-2xl">
-        <img src={icon} alt={name} className="w-10 h-10 object-contain" />
+    <div className="bg-white border border-gray-100 rounded-[24px] p-8 text-left shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-xl transition-all duration-300 relative flex flex-col h-full">
+      
+      {/* Badge */}
+      <div className={`absolute top-6 right-6 px-3 py-1 rounded-lg text-[12px] font-bold ${product.badgeColor}`}>
+        {product.badge}
       </div>
 
-      <h3 className="text-xl font-bold mb-2">{name}</h3>
-      <p className="text-gray-500 text-sm mb-4 leading-relaxed">
-        {description}
+      {/* Icon Container */}
+      <div className="w-14 h-14 bg-[#F8FAFC] rounded-2xl flex items-center justify-center text-3xl mb-6 shadow-sm border border-gray-50">
+        {product.icon}
+      </div>
+
+      <h3 className="text-[22px] font-bold text-[#1E293B] mb-3">{product.title}</h3>
+      <p className="text-[#64748B] text-[15px] leading-relaxed mb-6 flex-grow">
+        {product.desc}
       </p>
 
-      <div className="mb-6">
-        <span className="text-2xl font-bold">${price}</span>
-        <span className="text-gray-400 text-sm italic">/{period}</span>
+      <div className="flex items-baseline gap-1 mb-8">
+        <span className="text-[32px] font-extrabold text-[#1E293B]">{product.price}</span>
+        <span className="text-[#94A3B8] font-semibold text-[16px]">{product.type}</span>
       </div>
 
-      <ul className="space-y-3 mb-8 flex-grow">
-        {features.map((feature, idx) => (
-          <li
-            key={idx}
-            className="flex items-center gap-2 text-sm text-gray-600 font-medium"
-          >
-            <span className="text-green-500">✓</span> {feature}
+      {/* Features Section */}
+      <ul className="space-y-4 mb-10 border-t border-gray-50 pt-8">
+        {product.features.map((feat, i) => (
+          <li key={i} className="flex items-center gap-3 text-[#475569] font-medium text-[15px]">
+            <FaCheck className="text-[#10B981] text-[14px]" />
+            {feat}
           </li>
         ))}
       </ul>
 
-      <button
-        onClick={() => addToCart(product)}
-        className="btn btn-primary w-full rounded-xl font-bold tracking-wide"
-      >
+      {/* Action Button */}
+      <button className="w-full bg-[#7C3AED] text-white py-4 rounded-2xl font-bold text-lg hover:bg-[#6D28D9] transition-all shadow-lg shadow-purple-100 active:scale-95 mt-auto">
         Buy Now
       </button>
     </div>
